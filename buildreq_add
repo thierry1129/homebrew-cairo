@@ -4,6 +4,5 @@
 #
 libpng-dev
 libjpeg-turbo-dev
-tiff-dev
 libXrender-dev
 binutils-dev
