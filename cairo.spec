@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 20
+Release  : 21
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
