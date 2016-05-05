@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 23
+Release  : 24
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -13,7 +13,6 @@ License  : GPL-2.0 GPL-3.0 LGPL-2.0 LGPL-2.1 MIT MPL-1.1
 Requires: cairo-bin
 Requires: cairo-lib
 Requires: cairo-doc
-BuildRequires : binutils-dev
 BuildRequires : docbook-xml
 BuildRequires : grep
 BuildRequires : gtk-doc
@@ -21,6 +20,7 @@ BuildRequires : gtk-doc-dev
 BuildRequires : libXrender-dev
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : libpng-dev
+BuildRequires : librsvg-dev
 BuildRequires : libxslt-bin
 BuildRequires : pkgconfig(fontconfig)
 BuildRequires : pkgconfig(glib-2.0)
