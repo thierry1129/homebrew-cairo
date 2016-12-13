@@ -11,3 +11,4 @@ libjpeg-turbo-dev32
 libXrender-dev32
 libxcb-dev32
 freetype-dev32
+librsvg-dev32

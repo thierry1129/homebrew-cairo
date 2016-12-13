@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 29
+Release  : 30
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -30,6 +30,7 @@ BuildRequires : libjpeg-turbo-dev32
 BuildRequires : libpng-dev
 BuildRequires : libpng-dev32
 BuildRequires : librsvg-dev
+BuildRequires : librsvg-dev32
 BuildRequires : libxcb-dev32
 BuildRequires : libxslt-bin
 BuildRequires : pkgconfig(32fontconfig)
@@ -126,7 +127,7 @@ export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 export CFLAGS="$CFLAGS -m32 "
 export CXXFLAGS="$CXXFLAGS -m32 "
 export LDFLAGS="$LDFLAGS -m32 "
-%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes --disable-svg --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make V=1  %{?_smp_mflags}
 popd
 %install
@@ -197,6 +198,7 @@ popd
 /usr/lib32/pkgconfig/32cairo-png.pc
 /usr/lib32/pkgconfig/32cairo-ps.pc
 /usr/lib32/pkgconfig/32cairo-script.pc
+/usr/lib32/pkgconfig/32cairo-svg.pc
 /usr/lib32/pkgconfig/32cairo-xcb-shm.pc
 /usr/lib32/pkgconfig/32cairo-xcb.pc
 /usr/lib32/pkgconfig/32cairo-xlib-xrender.pc
@@ -209,6 +211,7 @@ popd
 /usr/lib32/pkgconfig/cairo-png.pc
 /usr/lib32/pkgconfig/cairo-ps.pc
 /usr/lib32/pkgconfig/cairo-script.pc
+/usr/lib32/pkgconfig/cairo-svg.pc
 /usr/lib32/pkgconfig/cairo-xcb-shm.pc
 /usr/lib32/pkgconfig/cairo-xcb.pc
 /usr/lib32/pkgconfig/cairo-xlib-xrender.pc
