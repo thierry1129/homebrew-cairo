@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 26
+Release  : 27
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -79,6 +79,7 @@ lib components for the cairo package.
 %setup -q -n cairo-1.14.6
 
 %build
+export LANG=C
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
@@ -109,8 +110,22 @@ rm -rf %{buildroot}
 /usr/include/cairo/cairo-xlib-xrender.h
 /usr/include/cairo/cairo-xlib.h
 /usr/include/cairo/cairo.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libcairo-gobject.so
+/usr/lib64/libcairo-script-interpreter.so
+/usr/lib64/libcairo.so
+/usr/lib64/pkgconfig/cairo-fc.pc
+/usr/lib64/pkgconfig/cairo-ft.pc
+/usr/lib64/pkgconfig/cairo-gobject.pc
+/usr/lib64/pkgconfig/cairo-pdf.pc
+/usr/lib64/pkgconfig/cairo-png.pc
+/usr/lib64/pkgconfig/cairo-ps.pc
+/usr/lib64/pkgconfig/cairo-script.pc
+/usr/lib64/pkgconfig/cairo-svg.pc
+/usr/lib64/pkgconfig/cairo-xcb-shm.pc
+/usr/lib64/pkgconfig/cairo-xcb.pc
+/usr/lib64/pkgconfig/cairo-xlib-xrender.pc
+/usr/lib64/pkgconfig/cairo-xlib.pc
+/usr/lib64/pkgconfig/cairo.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -182,7 +197,12 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
 /usr/lib64/cairo/libcairo-trace.so
 /usr/lib64/cairo/libcairo-trace.so.0
 /usr/lib64/cairo/libcairo-trace.so.0.0.0
+/usr/lib64/libcairo-gobject.so.2
+/usr/lib64/libcairo-gobject.so.2.11400.6
+/usr/lib64/libcairo-script-interpreter.so.2
+/usr/lib64/libcairo-script-interpreter.so.2.11400.6
+/usr/lib64/libcairo.so.2
+/usr/lib64/libcairo.so.2.11400.6
