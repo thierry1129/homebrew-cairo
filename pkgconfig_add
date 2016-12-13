@@ -6,3 +6,7 @@ fontconfig
 x11
 xext
 pixman-1
+32fontconfig
+32x11
+32xext
+32pixman-1

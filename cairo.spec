@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 28
+Release  : 29
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -14,20 +14,36 @@ Requires: cairo-bin
 Requires: cairo-lib
 Requires: cairo-doc
 BuildRequires : docbook-xml
+BuildRequires : freetype-dev32
+BuildRequires : gcc-dev32
+BuildRequires : gcc-libgcc32
+BuildRequires : gcc-libstdc++32
+BuildRequires : glibc-dev32
+BuildRequires : glibc-libc32
 BuildRequires : grep
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : libXrender-dev
+BuildRequires : libXrender-dev32
 BuildRequires : libjpeg-turbo-dev
+BuildRequires : libjpeg-turbo-dev32
 BuildRequires : libpng-dev
+BuildRequires : libpng-dev32
 BuildRequires : librsvg-dev
+BuildRequires : libxcb-dev32
 BuildRequires : libxslt-bin
+BuildRequires : pkgconfig(32fontconfig)
+BuildRequires : pkgconfig(32glib-2.0)
+BuildRequires : pkgconfig(32pixman-1)
+BuildRequires : pkgconfig(32x11)
+BuildRequires : pkgconfig(32xext)
 BuildRequires : pkgconfig(fontconfig)
 BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(pixman-1)
 BuildRequires : pkgconfig(valgrind)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
+BuildRequires : zlib-dev32
 
 %description
 Cairo - Multi-platform 2D graphics library
@@ -59,6 +75,17 @@ Provides: cairo-devel
 dev components for the cairo package.
 
 
+%package dev32
+Summary: dev32 components for the cairo package.
+Group: Default
+Requires: cairo-lib32
+Requires: cairo-bin
+Requires: cairo-dev
+
+%description dev32
+dev32 components for the cairo package.
+
+
 %package doc
 Summary: doc components for the cairo package.
 Group: Documentation
@@ -75,20 +102,51 @@ Group: Libraries
 lib components for the cairo package.
 
 
+%package lib32
+Summary: lib32 components for the cairo package.
+Group: Default
+
+%description lib32
+lib32 components for the cairo package.
+
+
 %prep
 %setup -q -n cairo-1.14.6
+pushd ..
+cp -a cairo-1.14.6 build32
+popd
 
 %build
 export LANG=C
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
+pushd ../build32/
+export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
+export CFLAGS="$CFLAGS -m32 "
+export CXXFLAGS="$CXXFLAGS -m32 "
+export LDFLAGS="$LDFLAGS -m32 "
+%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes --disable-svg --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+make V=1  %{?_smp_mflags}
+popd
 %install
 rm -rf %{buildroot}
+pushd ../build32/
+%make_install32
+if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
+then
+pushd %{buildroot}/usr/lib32/pkgconfig
+for i in *.pc ; do ln -s $i 32$i ; done
+popd
+fi
+popd
 %make_install
 
 %files
 %defattr(-,root,root,-)
+/usr/lib32/cairo/libcairo-trace.so
+/usr/lib32/cairo/libcairo-trace.so.0
+/usr/lib32/cairo/libcairo-trace.so.0.0.0
 
 %files bin
 %defattr(-,root,root,-)
@@ -126,6 +184,36 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/cairo-xlib-xrender.pc
 /usr/lib64/pkgconfig/cairo-xlib.pc
 /usr/lib64/pkgconfig/cairo.pc
+
+%files dev32
+%defattr(-,root,root,-)
+/usr/lib32/libcairo-gobject.so
+/usr/lib32/libcairo-script-interpreter.so
+/usr/lib32/libcairo.so
+/usr/lib32/pkgconfig/32cairo-fc.pc
+/usr/lib32/pkgconfig/32cairo-ft.pc
+/usr/lib32/pkgconfig/32cairo-gobject.pc
+/usr/lib32/pkgconfig/32cairo-pdf.pc
+/usr/lib32/pkgconfig/32cairo-png.pc
+/usr/lib32/pkgconfig/32cairo-ps.pc
+/usr/lib32/pkgconfig/32cairo-script.pc
+/usr/lib32/pkgconfig/32cairo-xcb-shm.pc
+/usr/lib32/pkgconfig/32cairo-xcb.pc
+/usr/lib32/pkgconfig/32cairo-xlib-xrender.pc
+/usr/lib32/pkgconfig/32cairo-xlib.pc
+/usr/lib32/pkgconfig/32cairo.pc
+/usr/lib32/pkgconfig/cairo-fc.pc
+/usr/lib32/pkgconfig/cairo-ft.pc
+/usr/lib32/pkgconfig/cairo-gobject.pc
+/usr/lib32/pkgconfig/cairo-pdf.pc
+/usr/lib32/pkgconfig/cairo-png.pc
+/usr/lib32/pkgconfig/cairo-ps.pc
+/usr/lib32/pkgconfig/cairo-script.pc
+/usr/lib32/pkgconfig/cairo-xcb-shm.pc
+/usr/lib32/pkgconfig/cairo-xcb.pc
+/usr/lib32/pkgconfig/cairo-xlib-xrender.pc
+/usr/lib32/pkgconfig/cairo-xlib.pc
+/usr/lib32/pkgconfig/cairo.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -206,3 +294,12 @@ rm -rf %{buildroot}
 /usr/lib64/libcairo-script-interpreter.so.2.11400.6
 /usr/lib64/libcairo.so.2
 /usr/lib64/libcairo.so.2.11400.6
+
+%files lib32
+%defattr(-,root,root,-)
+/usr/lib32/libcairo-gobject.so.2
+/usr/lib32/libcairo-gobject.so.2.11400.6
+/usr/lib32/libcairo-script-interpreter.so.2
+/usr/lib32/libcairo-script-interpreter.so.2.11400.6
+/usr/lib32/libcairo.so.2
+/usr/lib32/libcairo.so.2.11400.6

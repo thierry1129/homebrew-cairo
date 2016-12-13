@@ -3,3 +3,5 @@
 # undesirable. One name per line, no whitespace.
 #
 "gtk+-2.0"
+32"gtk+-2.0"
+32valgrind

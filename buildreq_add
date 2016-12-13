@@ -5,3 +5,9 @@
 libpng-dev
 libjpeg-turbo-dev
 libXrender-dev
+zlib-dev32
+libpng-dev32
+libjpeg-turbo-dev32
+libXrender-dev32
+libxcb-dev32
+freetype-dev32
