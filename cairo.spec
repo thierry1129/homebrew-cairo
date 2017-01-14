@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 30
+Release  : 31
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -18,6 +18,7 @@ BuildRequires : freetype-dev32
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
+BuildRequires : glib-dev32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : grep
@@ -31,15 +32,21 @@ BuildRequires : libpng-dev
 BuildRequires : libpng-dev32
 BuildRequires : librsvg-dev
 BuildRequires : librsvg-dev32
+BuildRequires : libxcb-dev
 BuildRequires : libxcb-dev32
 BuildRequires : libxslt-bin
+BuildRequires : mesa-dev
+BuildRequires : mesa-dev32
 BuildRequires : pkgconfig(32fontconfig)
 BuildRequires : pkgconfig(32glib-2.0)
+BuildRequires : pkgconfig(32ice)
 BuildRequires : pkgconfig(32pixman-1)
 BuildRequires : pkgconfig(32x11)
+BuildRequires : pkgconfig(32xcb)
 BuildRequires : pkgconfig(32xext)
 BuildRequires : pkgconfig(fontconfig)
 BuildRequires : pkgconfig(glib-2.0)
+BuildRequires : pkgconfig(ice)
 BuildRequires : pkgconfig(pixman-1)
 BuildRequires : pkgconfig(valgrind)
 BuildRequires : pkgconfig(x11)
@@ -119,18 +126,20 @@ popd
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1484412878
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export CFLAGS="$CFLAGS -m32 "
-export CXXFLAGS="$CXXFLAGS -m32 "
-export LDFLAGS="$LDFLAGS -m32 "
-%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes  --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+export CFLAGS="$CFLAGS -m32"
+export CXXFLAGS="$CXXFLAGS -m32"
+export LDFLAGS="$LDFLAGS -m32"
+%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make V=1  %{?_smp_mflags}
 popd
 %install
+export SOURCE_DATE_EPOCH=1484412878
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
@@ -145,9 +154,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-/usr/lib32/cairo/libcairo-trace.so
-/usr/lib32/cairo/libcairo-trace.so.0
-/usr/lib32/cairo/libcairo-trace.so.0.0.0
 
 %files bin
 %defattr(-,root,root,-)
@@ -300,6 +306,9 @@ popd
 
 %files lib32
 %defattr(-,root,root,-)
+/usr/lib32/cairo/libcairo-trace.so
+/usr/lib32/cairo/libcairo-trace.so.0
+/usr/lib32/cairo/libcairo-trace.so.0.0.0
 /usr/lib32/libcairo-gobject.so.2
 /usr/lib32/libcairo-gobject.so.2.11400.6
 /usr/lib32/libcairo-script-interpreter.so.2
