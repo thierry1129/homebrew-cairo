@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 31
+Release  : 32
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -126,7 +126,7 @@ popd
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484412878
+export SOURCE_DATE_EPOCH=1486681337
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
@@ -139,7 +139,7 @@ export LDFLAGS="$LDFLAGS -m32"
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1484412878
+export SOURCE_DATE_EPOCH=1486681337
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
