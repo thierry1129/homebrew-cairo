@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.6
-Release  : 32
+Release  : 33
 URL      : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Source0  : http://www.cairographics.org/releases/cairo-1.14.6.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -52,6 +52,7 @@ BuildRequires : pkgconfig(valgrind)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
 BuildRequires : zlib-dev32
+Patch1: cve-2016-9082.patch
 
 %description
 Cairo - Multi-platform 2D graphics library
@@ -120,13 +121,14 @@ lib32 components for the cairo package.
 
 %prep
 %setup -q -n cairo-1.14.6
+%patch1 -p1
 pushd ..
 cp -a cairo-1.14.6 build32
 popd
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1486681337
+export SOURCE_DATE_EPOCH=1486681710
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
@@ -139,7 +141,7 @@ export LDFLAGS="$LDFLAGS -m32"
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1486681337
+export SOURCE_DATE_EPOCH=1486681710
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
