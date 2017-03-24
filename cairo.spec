@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.8
-Release  : 34
+Release  : 35
 URL      : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -128,7 +128,11 @@ popd
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1488823002
+export SOURCE_DATE_EPOCH=1490396612
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
@@ -141,7 +145,7 @@ export LDFLAGS="$LDFLAGS -m32"
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1488823002
+export SOURCE_DATE_EPOCH=1490396612
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
