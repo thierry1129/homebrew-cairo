@@ -17,3 +17,5 @@ librsvg-dev
 glib-dev32
 mesa-dev32
 mesa-dev
+systemd-dev
+systemd-dev32

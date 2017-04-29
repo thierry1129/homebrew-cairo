@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.8
-Release  : 37
+Release  : 38
 URL      : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -51,6 +51,8 @@ BuildRequires : pkgconfig(pixman-1)
 BuildRequires : pkgconfig(valgrind)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
+BuildRequires : systemd-dev
+BuildRequires : systemd-dev32
 BuildRequires : zlib-dev32
 Patch1: cve-2016-9082.patch
 Patch2: madvise.patch
@@ -133,12 +135,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1493485506
+export SOURCE_DATE_EPOCH=1493486849
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
-%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
+%configure --disable-static --disable-gtk-doc --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes --enable-gl --enable-xlib-xcb
 make V=1  %{?_smp_mflags}
 
 pushd ../build32/
@@ -146,11 +148,11 @@ export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 export LDFLAGS="$LDFLAGS -m32"
-%configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+%configure --disable-static --disable-gtk-doc --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes --enable-gl --enable-xlib-xcb   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1493485506
+export SOURCE_DATE_EPOCH=1493486849
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
@@ -175,6 +177,7 @@ popd
 /usr/include/cairo/cairo-deprecated.h
 /usr/include/cairo/cairo-features.h
 /usr/include/cairo/cairo-ft.h
+/usr/include/cairo/cairo-gl.h
 /usr/include/cairo/cairo-gobject.h
 /usr/include/cairo/cairo-pdf.h
 /usr/include/cairo/cairo-ps.h
@@ -189,8 +192,11 @@ popd
 /usr/lib64/libcairo-gobject.so
 /usr/lib64/libcairo-script-interpreter.so
 /usr/lib64/libcairo.so
+/usr/lib64/pkgconfig/cairo-egl.pc
 /usr/lib64/pkgconfig/cairo-fc.pc
 /usr/lib64/pkgconfig/cairo-ft.pc
+/usr/lib64/pkgconfig/cairo-gl.pc
+/usr/lib64/pkgconfig/cairo-glx.pc
 /usr/lib64/pkgconfig/cairo-gobject.pc
 /usr/lib64/pkgconfig/cairo-pdf.pc
 /usr/lib64/pkgconfig/cairo-png.pc
@@ -199,6 +205,7 @@ popd
 /usr/lib64/pkgconfig/cairo-svg.pc
 /usr/lib64/pkgconfig/cairo-xcb-shm.pc
 /usr/lib64/pkgconfig/cairo-xcb.pc
+/usr/lib64/pkgconfig/cairo-xlib-xcb.pc
 /usr/lib64/pkgconfig/cairo-xlib-xrender.pc
 /usr/lib64/pkgconfig/cairo-xlib.pc
 /usr/lib64/pkgconfig/cairo.pc
@@ -208,8 +215,11 @@ popd
 /usr/lib32/libcairo-gobject.so
 /usr/lib32/libcairo-script-interpreter.so
 /usr/lib32/libcairo.so
+/usr/lib32/pkgconfig/32cairo-egl.pc
 /usr/lib32/pkgconfig/32cairo-fc.pc
 /usr/lib32/pkgconfig/32cairo-ft.pc
+/usr/lib32/pkgconfig/32cairo-gl.pc
+/usr/lib32/pkgconfig/32cairo-glx.pc
 /usr/lib32/pkgconfig/32cairo-gobject.pc
 /usr/lib32/pkgconfig/32cairo-pdf.pc
 /usr/lib32/pkgconfig/32cairo-png.pc
@@ -218,11 +228,15 @@ popd
 /usr/lib32/pkgconfig/32cairo-svg.pc
 /usr/lib32/pkgconfig/32cairo-xcb-shm.pc
 /usr/lib32/pkgconfig/32cairo-xcb.pc
+/usr/lib32/pkgconfig/32cairo-xlib-xcb.pc
 /usr/lib32/pkgconfig/32cairo-xlib-xrender.pc
 /usr/lib32/pkgconfig/32cairo-xlib.pc
 /usr/lib32/pkgconfig/32cairo.pc
+/usr/lib32/pkgconfig/cairo-egl.pc
 /usr/lib32/pkgconfig/cairo-fc.pc
 /usr/lib32/pkgconfig/cairo-ft.pc
+/usr/lib32/pkgconfig/cairo-gl.pc
+/usr/lib32/pkgconfig/cairo-glx.pc
 /usr/lib32/pkgconfig/cairo-gobject.pc
 /usr/lib32/pkgconfig/cairo-pdf.pc
 /usr/lib32/pkgconfig/cairo-png.pc
@@ -231,6 +245,7 @@ popd
 /usr/lib32/pkgconfig/cairo-svg.pc
 /usr/lib32/pkgconfig/cairo-xcb-shm.pc
 /usr/lib32/pkgconfig/cairo-xcb.pc
+/usr/lib32/pkgconfig/cairo-xlib-xcb.pc
 /usr/lib32/pkgconfig/cairo-xlib-xrender.pc
 /usr/lib32/pkgconfig/cairo-xlib.pc
 /usr/lib32/pkgconfig/cairo.pc
