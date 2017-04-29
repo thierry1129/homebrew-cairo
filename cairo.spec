@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.8
-Release  : 36
+Release  : 37
 URL      : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.14.8.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -53,6 +53,7 @@ BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
 BuildRequires : zlib-dev32
 Patch1: cve-2016-9082.patch
+Patch2: madvise.patch
 
 %description
 Cairo - Multi-platform 2D graphics library
@@ -122,17 +123,21 @@ lib32 components for the cairo package.
 %prep
 %setup -q -n cairo-1.14.8
 %patch1 -p1
+%patch2 -p1
 pushd ..
 cp -a cairo-1.14.8 build32
 popd
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1490396612
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export SOURCE_DATE_EPOCH=1493485506
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong "
 %configure --disable-static --disable-gtk-doc --enable-gl=no --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes
 make V=1  %{?_smp_mflags}
 
@@ -145,7 +150,7 @@ export LDFLAGS="$LDFLAGS -m32"
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1490396612
+export SOURCE_DATE_EPOCH=1493485506
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
