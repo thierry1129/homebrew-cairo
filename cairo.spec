@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.14.10
-Release  : 40
+Release  : 41
 URL      : https://www.cairographics.org/releases/cairo-1.14.10.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.14.10.tar.xz
 Summary  : Multi-platform 2D graphics library
