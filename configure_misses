@@ -1,0 +1,84 @@
+Configure miss: whether gcc supports -errwarn
+Configure miss: whether gcc supports -erroff=E_ENUM_TYPE_MISMATCH_ARG
+Configure miss: whether gcc supports -erroff=E_ENUM_TYPE_MISMATCH_OP
+Configure miss: whether float word ordering is bigendian
+Configure miss: whether atomic ops require a memory barrier
+Configure miss: Sun Solaris (non-POSIX ctime_r)
+Configure miss: connect in -lsocket
+Configure miss: sys/int_types.h usability
+Configure miss: sys/int_types.h presence
+Configure miss: sys/int_types.h
+Configure miss: uint128_t
+Configure miss: lockdep.h usability
+Configure miss: lockdep.h presence
+Configure miss: lockdep.h
+Configure miss: memfault.h usability
+Configure miss: memfault.h presence
+Configure miss: memfault.h
+Configure miss: lzo2a_decompress in -llzo2
+Configure miss: ApplicationServices/ApplicationServices.h usability
+Configure miss: ApplicationServices/ApplicationServices.h presence
+Configure miss: ApplicationServices/ApplicationServices.h
+Configure miss: CoreGraphics/CoreGraphics.h usability
+Configure miss: CoreGraphics/CoreGraphics.h presence
+Configure miss: CoreGraphics/CoreGraphics.h
+Configure miss: whether cairo's Quartz surface backend feature could be enabled
+Configure miss: whether cairo's Quartz font backend feature could be enabled
+Configure miss: whether cairo's Microsoft Windows surface backend feature could be enabled
+Configure miss: whether cairo's Microsoft Windows font backend feature could be enabled
+Configure miss: whether cairo's WGL functions feature could be enabled
+Configure miss: gs
+Configure miss: LIBSPECTRE
+Configure miss: POPPLER
+Configure miss: LIBRSVG
+Configure miss: bfd_openr in -lbfd
+Configure miss: libiberty.h usability
+Configure miss: libiberty.h presence
+Configure miss: libiberty.h
+Configure miss: whether cairo's symbol-lookup feature could be enabled
+Configure miss: gtk
+Configure miss: i686-generic-linux-gnu-objdump
+Configure miss: i686-generic-linux-gnu-dlltool
+Configure miss: i686-generic-linux-gnu-strip
+Configure miss: i686-generic-linux-gnu-mt
+Configure miss: i686-generic-linux-gnu-pkg-config
+Configure miss: whether gcc supports -errwarn
+Configure miss: whether gcc supports -erroff=E_ENUM_TYPE_MISMATCH_ARG
+Configure miss: whether gcc supports -erroff=E_ENUM_TYPE_MISMATCH_OP
+Configure miss: whether float word ordering is bigendian
+Configure miss: whether atomic ops require a memory barrier
+Configure miss: Sun Solaris (non-POSIX ctime_r)
+Configure miss: connect in -lsocket
+Configure miss: sys/int_types.h usability
+Configure miss: sys/int_types.h presence
+Configure miss: sys/int_types.h
+Configure miss: uint128_t
+Configure miss: __uint128_t
+Configure miss: lockdep.h usability
+Configure miss: lockdep.h presence
+Configure miss: lockdep.h
+Configure miss: memfault.h usability
+Configure miss: memfault.h presence
+Configure miss: memfault.h
+Configure miss: lzo2a_decompress in -llzo2
+Configure miss: ApplicationServices/ApplicationServices.h usability
+Configure miss: ApplicationServices/ApplicationServices.h presence
+Configure miss: ApplicationServices/ApplicationServices.h
+Configure miss: CoreGraphics/CoreGraphics.h usability
+Configure miss: CoreGraphics/CoreGraphics.h presence
+Configure miss: CoreGraphics/CoreGraphics.h
+Configure miss: whether cairo's Quartz surface backend feature could be enabled
+Configure miss: whether cairo's Quartz font backend feature could be enabled
+Configure miss: whether cairo's Microsoft Windows surface backend feature could be enabled
+Configure miss: whether cairo's Microsoft Windows font backend feature could be enabled
+Configure miss: whether cairo's WGL functions feature could be enabled
+Configure miss: gs
+Configure miss: LIBSPECTRE
+Configure miss: POPPLER
+Configure miss: LIBRSVG
+Configure miss: bfd_openr in -lbfd
+Configure miss: libiberty.h usability
+Configure miss: libiberty.h presence
+Configure miss: libiberty.h
+Configure miss: whether cairo's symbol-lookup feature could be enabled
+Configure miss: gtk
