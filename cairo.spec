@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.16.0
-Release  : 58
+Release  : 59
 URL      : https://www.cairographics.org/releases/cairo-1.16.0.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.16.0.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -56,6 +56,7 @@ BuildRequires : systemd-dev
 BuildRequires : systemd-dev32
 BuildRequires : zlib-dev32
 Patch1: madvise.patch
+Patch2: CVE-2019-6462.patch
 
 %description
 Cairo - Multi-platform 2D graphics library
@@ -136,6 +137,7 @@ license components for the cairo package.
 %prep
 %setup -q -n cairo-1.16.0
 %patch1 -p1
+%patch2 -p1
 pushd ..
 cp -a cairo-1.16.0 build32
 popd
@@ -145,7 +147,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545316576
+export SOURCE_DATE_EPOCH=1548195857
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -158,15 +160,15 @@ make  %{?_smp_mflags}
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export ASFLAGS="$ASFLAGS --32"
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
-export LDFLAGS="$LDFLAGS -m32"
+export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
 %configure --disable-static --disable-gtk-doc --enable-xlib=yes --enable-xcb=yes --enable-ft=yes --enable-fc=yes --enable-gl --enable-xlib-xcb   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1545316576
+export SOURCE_DATE_EPOCH=1548195857
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cairo
 cp COPYING-LGPL-2.1 %{buildroot}/usr/share/package-licenses/cairo/COPYING-LGPL-2.1
