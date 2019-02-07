@@ -1,2 +1,4 @@
 madvise.patch
+CVE-2019-6461.patch
 CVE-2019-6462.patch
+CVE-2018-19876.patch

@@ -4,7 +4,7 @@
 #
 Name     : cairo
 Version  : 1.16.0
-Release  : 60
+Release  : 61
 URL      : https://www.cairographics.org/releases/cairo-1.16.0.tar.xz
 Source0  : https://www.cairographics.org/releases/cairo-1.16.0.tar.xz
 Summary  : Multi-platform 2D graphics library
@@ -56,7 +56,9 @@ BuildRequires : systemd-dev
 BuildRequires : systemd-dev32
 BuildRequires : zlib-dev32
 Patch1: madvise.patch
-Patch2: CVE-2019-6462.patch
+Patch2: CVE-2019-6461.patch
+Patch3: CVE-2019-6462.patch
+Patch4: CVE-2018-19876.patch
 
 %description
 Cairo - Multi-platform 2D graphics library
@@ -138,6 +140,8 @@ license components for the cairo package.
 %setup -q -n cairo-1.16.0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 pushd ..
 cp -a cairo-1.16.0 build32
 popd
@@ -147,7 +151,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548195857
+export SOURCE_DATE_EPOCH=1549582970
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -168,7 +172,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1548195857
+export SOURCE_DATE_EPOCH=1549582970
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cairo
 cp COPYING-LGPL-2.1 %{buildroot}/usr/share/package-licenses/cairo/COPYING-LGPL-2.1
