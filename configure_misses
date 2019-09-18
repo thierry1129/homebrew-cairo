@@ -30,7 +30,9 @@ Configure miss: whether cairo's WGL functions feature could be enabled
 Configure miss: gs
 Configure miss: POPPLER
 Configure miss: LIBRSVG
-Configure miss: bfd_openr in -lbfd
+Configure miss: bfd.h usability
+Configure miss: bfd.h presence
+Configure miss: bfd.h
 Configure miss: libiberty.h usability
 Configure miss: libiberty.h presence
 Configure miss: libiberty.h
