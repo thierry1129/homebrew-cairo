@@ -2,7 +2,7 @@ class Cairo < Formula
   desc "Vector graphics library with cross-device output support"
   homepage "https://cairographics.org/"
   url "https://cairographics.org/snapshots/cairo-1.17.2.tar.xz"
-  sha256 "c5d6f12701f23b2dc2988a5a5586848e70e858fe"
+  sha256 "6b70d4655e2a47a22b101c666f4b29ba746eda4aa8a0f7255b32b2e9408801df"
   revision 2
 
 
